@@ -84,160 +84,18 @@ class Room:
     @staticmethod
     def __room_variants():
         massive_list = []
+        price_type = {'одноместный': 2900, 'двухместный': 2300, 'полулюкс': 3200, 'люкс': 4100}
+        comfort_rate = {'стандарт': 1, 'апартамент': 1.5, 'стандарт_улучшенный': 1.2}
         with open('fund.txt') as f:
-            rome_list = f.readlines()
-            for i in rome_list:
-                _dict = {}
-                if i.split()[1] == 'одноместный' and i.split()[-1] == 'стандарт':
-                    _dict['price'] = 2900
-                    _dict['options'] = 'No meals'
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'двухместный' and i.split()[-1] == 'стандарт':
-                    _dict['price'] = 2300
-                    _dict['options'] = 'No meals'
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'полулюкс' and i.split()[-1] == 'стандарт':
-                    _dict['price'] = 3200
-                    _dict['options'] = 'No meals'
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'полулюкс' and i.split()[-1] == 'стандарт':
-                    _dict['price'] = 4100
-                    _dict['options'] = 'No meals'
-                    massive_list.append(_dict)
-
-                if i.split()[1] == 'одноместный' and i.split()[-1] == 'стандарт_улучшенный':
-                    _dict['price'] = 2900 * 1.2
-                    _dict['options'] = 'No meals'
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'двухместный' and i.split()[-1] == 'стандарт_улучшенный':
-                    _dict['price'] = 2300 * 1.2
-                    _dict['options'] = 'No meals'
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'полулюкс' and i.split()[-1] == 'стандарт_улучшенный':
-                    _dict['price'] = 3200 * 1.2
-                    _dict['options'] = 'No meals'
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'полулюкс' and i.split()[-1] == 'стандарт_улучшенный':
-                    _dict['price'] = 4100 * 1.2
-                    _dict['options'] = 'No meals'
-                    massive_list.append(_dict)
-
-                if i.split()[1] == 'одноместный' and i.split()[-1] == 'апартамент':
-                    _dict['price'] = 2900 * 1.5
-                    _dict['options'] = 'No meals'
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'двухместный' and i.split()[-1] == 'апартамент':
-                    _dict['price'] = 2300 * 1.5
-                    _dict['options'] = 'No meals'
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'полулюкс' and i.split()[-1] == 'апартамент':
-                    _dict['price'] = 3200 * 1.5
-                    _dict['options'] = 'No meals'
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'полулюкс' and i.split()[-1] == 'апартамент':
-                    _dict['price'] = 4100 * 1.5
-                    _dict['options'] = 'No meals'
-                    massive_list.append(_dict)
-
-                if i.split()[1] == 'одноместный' and i.split()[-1] == 'стандарт':
-                    _dict['price'] = 2900 + 280
-                    _dict['options'] = 'Breakfast'
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'двухместный' and i.split()[-1] == 'стандарт':
-                    _dict['price'] = 2300 + 280
-                    _dict['options'] = 'Breakfast'
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'полулюкс' and i.split()[-1] == 'стандарт':
-                    _dict['price'] = 3200 + 280
-                    _dict['options'] = 'Breakfast'
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'полулюкс' and i.split()[-1] == 'стандарт':
-                    _dict['price'] = 4100 + 280
-                    _dict['options'] = 'Breakfast'
-                    massive_list.append(_dict)
-
-                if i.split()[1] == 'одноместный' and i.split()[-1] == 'стандарт_улучшенный':
-                    _dict['price'] = 2900 * 1.2 + 280
-                    _dict['options'] = 'Breakfast'
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'двухместный' and i.split()[-1] == 'стандарт_улучшенный':
-                    _dict['price'] = 2300 * 1.2 + 280
-                    _dict['options'] = 'Breakfast'
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'полулюкс' and i.split()[-1] == 'стандарт_улучшенный':
-                    _dict['price'] = 3200 * 1.2 + 280
-                    _dict['options'] = 'Breakfast'
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'полулюкс' and i.split()[-1] == 'стандарт_улучшенный':
-                    _dict['price'] = 4100 * 1.2 + 280
-                    _dict['options'] = 'Breakfast'
-                    massive_list.append(_dict)
-
-                if i.split()[1] == 'одноместный' and i.split()[-1] == 'апартамент':
-                    _dict['price'] = 2900 * 1.5 + 280
-                    _dict['options'] = 'Breakfast'
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'двухместный' and i.split()[-1] == 'апартамент':
-                    _dict['price'] = 2300 * 1.5 + 280
-                    _dict['options'] = 'Breakfast'
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'полулюкс' and i.split()[-1] == 'апартамент':
-                    _dict['price'] = 3200 * 1.5 + 280
-                    _dict['options'] = 'Breakfast'
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'полулюкс' and i.split()[-1] == 'апартамент':
-                    _dict['price'] = 4100 * 1.5 + 280
-                    _dict['options'] = 'Breakfast'
-                    massive_list.append(_dict)
-
-                if i.split()[1] == 'одноместный' and i.split()[-1] == 'стандарт':
-                    _dict['price'] = 2900 + 1000
-                    _dict['options'] = 'Half board '
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'двухместный' and i.split()[-1] == 'стандарт':
-                    _dict['price'] = 2300 + 1000
-                    _dict['options'] = 'Half board '
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'полулюкс' and i.split()[-1] == 'стандарт':
-                    _dict['price'] = 3200 + 1000
-                    _dict['options'] = 'Half board '
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'полулюкс' and i.split()[-1] == 'стандарт':
-                    _dict['price'] = 4100 + 1000
-                    _dict['options'] = 'Half board '
-                    massive_list.append(_dict)
-
-                if i.split()[1] == 'одноместный' and i.split()[-1] == 'стандарт_улучшенный':
-                    _dict['price'] = 2900 * 1.2 + 1000
-                    _dict['options'] = 'Half board '
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'двухместный' and i.split()[-1] == 'стандарт_улучшенный':
-                    _dict['price'] = 2300 * 1.2 + 1000
-                    _dict['options'] = 'Half board '
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'полулюкс' and i.split()[-1] == 'стандарт_улучшенный':
-                    _dict['price'] = 3200 * 1.2 + 1000
-                    _dict['options'] = 'Half board '
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'полулюкс' and i.split()[-1] == 'стандарт_улучшенный':
-                    _dict['price'] = 4100 * 1.2 + 1000
-                    _dict['options'] = 'Half board '
-                    massive_list.append(_dict)
-
-                if i.split()[1] == 'одноместный' and i.split()[-1] == 'апартамент':
-                    _dict['price'] = 2900 * 1.5 + 1000
-                    _dict['options'] = 'Half board '
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'двухместный' and i.split()[-1] == 'апартамент':
-                    _dict['price'] = 2300 * 1.5 + 1000
-                    _dict['options'] = 'Half board '
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'полулюкс' and i.split()[-1] == 'апартамент':
-                    _dict['price'] = 3200 * 1.5 + 1000
-                    _dict['options'] = 'Half board '
-                    massive_list.append(_dict)
-                elif i.split()[1] == 'полулюкс' and i.split()[-1] == 'апартамент':
-                    _dict['price'] = 4100 * 1.5 + 1000
-                    _dict['options'] = 'Half board '
-                    massive_list.append(_dict)
+            room_list = f.readlines()
+            for i in room_list:
+                room_dict = {
+                    'number': i.split()[0],
+                    'type_room': i.split()[1],
+                    'capacity': i.split()[-2],
+                    'comfort': i.split()[-1]
+                }
+                massive_list.append(room_dict)
+            for room in massive_list:
+                room['price'] = price_type[room['type_room']] * comfort_rate[room['comfort']]
         return massive_list
