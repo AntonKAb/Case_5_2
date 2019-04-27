@@ -81,7 +81,7 @@ class Room:
         self.variants = self.__room_variants()
         self.booking_time = []
 
-    @staticmethod
+ @staticmethod
     def __room_variants():
         massive_list = []
         price_type = {'одноместный': 2900, 'двухместный': 2300, 'полулюкс': 3200, 'люкс': 4100}
@@ -96,6 +96,17 @@ class Room:
                     'comfort': i.split()[-1]
                 }
                 massive_list.append(room_dict)
-            for room in massive_list:
-                room['price'] = price_type[room['type_room']] * comfort_rate[room['comfort']]
-        return massive_list
+        for room in massive_list:
+            room['price'] = price_type[room['type_room']] * comfort_rate[room['comfort']]
+        finish_list = []
+        for el in massive_list:
+            s_1, s_2, s_3 = el.copy(), el.copy(), el.copy()
+            s_1['food'] = 'No meals'
+            finish_list.append(s_1)
+            s_2['food'] = 'Breakfast'
+            s_2['price'] += 280
+            finish_list.append(s_2)
+            s_3['food'] = 'Half board'
+            s_3['price'] += 1000
+            finish_list.append(s_3)
+        return finish_list
