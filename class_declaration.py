@@ -11,24 +11,23 @@ class Hotel:
     profit = 0
 
 
-# TODO
 class Client:
-    def __init__(self, name, surname, middle_name, from_date, days, people, money, hotel):
+    def __init__(self, register_date, name, surname, middle_name, people, from_date, days, money, hotel):
+        self.register_date = register_date
         self.name = name
         self.surname = surname
         self.middle_name = middle_name
         self.fullname = name + surname + middle_name
         self.from_date = from_date
-        self.days = days
-        self.dates_list = Client._make_dates_list(from_date, days)
-        self.days_number = len(self.dates_list)
-        self.people = people
-        self.money = money
+        self.days = int(days)
+        self.dates_list = Client.__make_dates_list(from_date, days)
+        self.people = int(people)
+        self.money = int(money)
         self.hotel = hotel
         hotel.clients.append(self)
 
     @staticmethod
-    def _make_dates_list(from_date, days):
+    def __make_dates_list(from_date, days):
         day_from, month_from, year_from = list(map(int, from_date.split('.')))
         years = list(range(year_from, year_from+days//365+1))
         time_list = []
@@ -65,35 +64,36 @@ class Client:
         else:
             answer = False
         return {
+            'best_choice': best_choice,
             'answer': answer,
             'best_choice_options': best_choice_options,
             'hotel': self.hotel,
         }
 
 
-# TODO
 class Room:
-    def __init__(self, number, type_room, comfort, capacity):
+    def __init__(self, number, type_room, comfort, capacity, hotel):
         self.number = number
         self.type_room = type_room
         self.comfort = comfort
         self.capacity = capacity
         self.variants = self.__room_variants()
         self.booking_time = []
+        self.hotel = hotel
 
- @staticmethod
+    @staticmethod
     def __room_variants():
         massive_list = []
         price_type = {'одноместный': 2900, 'двухместный': 2300, 'полулюкс': 3200, 'люкс': 4100}
         comfort_rate = {'стандарт': 1, 'апартамент': 1.5, 'стандарт_улучшенный': 1.2}
         with open('fund.txt') as f:
-            room_list = f.readlines()
-            for i in room_list:
+            room_list = list(map(lambda each_room: each_room.rstrip(), f.readlines()))
+            for room in room_list:
                 room_dict = {
-                    'number': i.split()[0],
-                    'type_room': i.split()[1],
-                    'capacity': i.split()[-2],
-                    'comfort': i.split()[-1]
+                    'number': room.split()[0],
+                    'type_room': room.split()[1],
+                    'capacity': room.split()[-2],
+                    'comfort': room.split()[-1]
                 }
                 massive_list.append(room_dict)
         for room in massive_list:
