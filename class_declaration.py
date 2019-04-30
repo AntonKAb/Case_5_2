@@ -5,22 +5,22 @@ import random
 
 
 class Hotel:
-    class Hotel:
     def __init__(self):
-        self.rooms = 0
-        self.clients = 0
+        self.data = '01.03.18'
+        self.clients = []
+        self.bron = 0
+        self.rooms = []
         self.profit = 0
         self.loss = 0
-        self.data = '01.03.18'
         self.percent = ''
         self.booked_single = 0
         self.booked_double = 0
         self.booked_junior = 0
         self.booked_luxury = 0
-        
+
     def __str__(self):
         string = f'Итог за {self.data}\n\nКоличество занятых номеров:' \
-            f'{self.clients}\n\nКоличество свободных номеров: {self.rooms - self.clients}\n\n' \
+            f'{len(self.clients)}\n\nКоличество свободных номеров: {len(self.rooms) - self.bron}\n\n' \
             f'Занятость по категориям\n\nОдноместный: {self.booked_single} из {Hotel.__room()["одноместный"]}\n\n' \
             f'Двухместный: {self.booked_double} из {Hotel.__room()["двухместный"]}\n\n' \
             f'Полулюкс: {self.booked_junior} из {Hotel.__room()["полулюкс"]}' \
@@ -52,16 +52,15 @@ class Client:
         self.fullname = name + surname + middle_name
         self.from_date = from_date
         self.days = int(days)
-        self.dates_list = Client.__make_dates_list(from_date, days)
+        self.dates_list = self.__make_dates_list()
         self.people = int(people)
         self.money = int(money)
         self.hotel = hotel
         hotel.clients.append(self)
 
-    @staticmethod
-    def __make_dates_list(from_date, days):
-        day_from, month_from, year_from = list(map(int, from_date.split('.')))
-        years = list(range(year_from, year_from+days//365+1))
+    def __make_dates_list(self):
+        day_from, month_from, year_from = list(map(int, self.from_date.split('.')))
+        years = list(range(year_from, year_from+self.days//365+1))
         time_list = []
         for year in years:
             feb_days = (29 if not year % 400 else (28 if not year % 100 else (29 if not year % 4 else 28)))
@@ -72,7 +71,7 @@ class Client:
                 for day in range(1, months[month]+1):
                     time_list.append((day, month+1, year))
         start_index = time_list.index((day_from, month_from, year_from))
-        time_list = time_list[start_index+1:][:days]
+        time_list = time_list[start_index+1:][:self.days]
         return time_list
 
     def registration(self):
@@ -89,10 +88,13 @@ class Client:
                         best_choice = room
                         best_choice_price = variant['price']
                         best_choice_options = variant['options']
-        if random.random() <= 0.7:
-            best_choice.booking_time += self.dates_list
-            max_profit += best_choice_price * self.people
-            answer = True
+        if best_choice:
+            if random.random() <= 0.7:
+                best_choice.booking_time += self.dates_list
+                max_profit += best_choice_price * self.people
+                answer = True
+            else:
+                answer = False
         else:
             answer = False
         return {
