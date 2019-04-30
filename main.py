@@ -16,15 +16,15 @@ def main():
     money_lose = []
     type_list = []
     with open('booking.txt') as f:
-        clients_list = list(map(lambda client_data: client_data.rstrip(), f.readlines()))
+        clients_list = list(map(lambda client_data: client_data.rstrip().split(), f.readlines()))
     clients = [Client(*client_info, hotel=hotel) for client_info in clients_list]
     for hotel_client in clients:
         reg_params = hotel_client.registration()
         print('Поступила заявка на бронирование:\n')
-        print('{} {} {} {} {} {} {} {}\n').format(hotel_client.register_date, hotel_client.surname,
-                                                  hotel_client.name, hotel_client.middle_name,
-                                                  hotel_client.people, hotel_client.from_date,
-                                                  hotel_client.days, hotel_client.money)
+        print('{} {} {} {} {} {} {} {}\n'.format(hotel_client.register_date, hotel_client.surname,
+                                                 hotel_client.name, hotel_client.middle_name,
+                                                 hotel_client.people, hotel_client.from_date,
+                                                 hotel_client.days, hotel_client.money))
         reg_options = reg_params['best_choice_options']
         if reg_params['best_choice'] is None:
             print('Предложений по данному запросу не найдено. В бронировании отказано.\n')
@@ -49,24 +49,25 @@ def main():
             else:
                 print('Клиент отказался от варианта'),
                 money_lose.append(reg_options['price'] * int(hotel_client.days))
-        Hotel.clients = len(clients_amount)
-        Hotel.profit = sum(money_earn)
-        Hotel.loss = sum(money_lose)
-        Hotel.percent = str(round((len(rooms) - len(clients_amount)) * 100 / len(rooms), 2)) + ' %'
-        for el in type_list:
-            type_list.append(el.type_room)
-        type_dict = {
-            'одноместный': type_list.count('одноместный'),
-            'двухместный': type_list.count('двухместный'),
-            'полулюкс': type_list.count('полулюкс'),
-            'люкс': type_list.count('люкс')
-        }
-        Hotel.booked_single = type_dict['одноместный']
-        Hotel.booked_double = type_dict['двухместный'],
-        Hotel.booked_junior = type_dict['полулюкс']
-        Hotel.booked_luxury = type_dict['люкс']
-        print(Hotel)
+        hotel.bron = len(clients_amount)
+        hotel.profit = sum(money_earn)
+        hotel.loss = sum(money_lose)
+        hotel.percent = str(round((len(rooms) - len(clients_amount)) * 100 / len(rooms), 2)) + ' %'
+    for el in type_list:
+        type_list.append(el.type_room)
+    type_dict = {
+        'одноместный': type_list.count('одноместный'),
+        'двухместный': type_list.count('двухместный'),
+        'полулюкс': type_list.count('полулюкс'),
+        'люкс': type_list.count('люкс')
+    }
+    hotel.booked_single = type_dict['одноместный']
+    hotel.booked_double = type_dict['двухместный'],
+    hotel.booked_junior = type_dict['полулюкс']
+    hotel.booked_luxury = type_dict['люкс']
+    print(hotel)
 
 
 if __name__ == '__main__':
     main()
+
