@@ -5,19 +5,19 @@ import random
 
 
 class Hotel:
-    def __init__(self, rooms, clients, profit, loss, data, percent,
-                 booked_single, booked_double, booked_junior, booked_luxury):
-        self.rooms = rooms
-        self.clients = clients
-        self.profit = profit
-        self.loss = loss
-        self.data = data
-        self.percent = percent
-        self.booked_single = booked_single
-        self.booked_double = booked_double
-        self.booked_junior = booked_junior
-        self.booked_luxury = booked_luxury
-
+    class Hotel:
+    def __init__(self):
+        self.rooms = 0
+        self.clients = 0
+        self.profit = 0
+        self.loss = 0
+        self.data = '01.03.18'
+        self.percent = ''
+        self.booked_single = 0
+        self.booked_double = 0
+        self.booked_junior = 0
+        self.booked_luxury = 0
+        
     def __str__(self):
         string = f'Итог за {self.data}\n\nКоличество занятых номеров:' \
             f'{self.clients}\n\nКоличество свободных номеров: {self.rooms - self.clients}\n\n' \
