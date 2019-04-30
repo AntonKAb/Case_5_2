@@ -4,11 +4,43 @@ Class-declaration file.
 import random
 
 
-# TODO
 class Hotel:
-    rooms = []
-    clients = []
-    profit = 0
+    def __init__(self, rooms, clients, profit, loss, data, percent,
+                 booked_single, booked_double, booked_junior, booked_luxury):
+        self.rooms = rooms
+        self.clients = clients
+        self.profit = profit
+        self.loss = loss
+        self.data = data
+        self.percent = percent
+        self.booked_single = booked_single
+        self.booked_double = booked_double
+        self.booked_junior = booked_junior
+        self.booked_luxury = booked_luxury
+
+    def __str__(self):
+        string = f'Итог за {self.data}\n\nКоличество занятых номеров:' \
+            f'{self.clients}\n\nКоличество свободных номеров: {self.rooms - self.clients}\n\n' \
+            f'Занятость по категориям\n\nОдноместный: {self.booked_single} из {Hotel.__room()["одноместный"]}\n\n' \
+            f'Двухместный: {self.booked_double} из {Hotel.__room()["двухместный"]}\n\n' \
+            f'Полулюкс: {self.booked_junior} из {Hotel.__room()["полулюкс"]}' \
+            f'Люкс: {self.booked_luxury} из {Hotel.__room()["люкс"]}\n\n' \
+            f'Доход за день: {self.profit}\n\n' \
+            f'Упущенный доход: {self.loss}\n\n' \
+            f'Процент загруженности гостиницы: {self.percent}'
+        return string
+
+    def __repr__(self):
+        return self.__str__()
+
+    @staticmethod
+    def __room():
+        _dict = {'одноместный': 0, 'двухместный': 0, 'полулюкс': 0, 'люкс': 0}
+        with open('fund.txt') as f:
+            room_list = list(map(lambda each_room: each_room.rstrip(), f.readlines()))
+        for room in room_list:
+            _dict[room.split()[1]] += 1
+        return _dict
 
 
 class Client:
